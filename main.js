@@ -5,7 +5,7 @@ const url = "https://www.crowd.live/GSSGS";
     const page = await browser.newPage();
     await page.goto(url);
     await page.waitForSelector('#firstName');
-    await page.type("#firstName", "Rick - AI5A");
+    await page.type("#firstName", "AI5A - Rick");
     await page.type("#city", "South Central Austin");
     await page.click("#anonymousLoginButton");
     await page.waitForSelector('#firstName', {hidden: true});
