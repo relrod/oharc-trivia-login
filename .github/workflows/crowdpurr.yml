@@ -1,0 +1,33 @@
+---
+name: dagd-test
+on:
+  push:
+  pull_request:
+  schedule:
+    # This is UTC. We need it to be *after* bingo. We can check in "late" so we
+    # don't need to worry about UTC shifting us an hour, just err on the side of
+    # being an hour late. Since we need it to be after bingo, we add a half hour
+    # so really we could end up being 1h30m "late".
+    #
+    # So this cron: will end up being 10:30pm in CDT, 9:30pm in CST. In both
+    # cases, it should be post-bingo, and count as a valid check-in.
+    - cron: "30 3 * * 6"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    continue-on-error: false
+    steps:
+      - uses: actions/checkout@v2
+      - uses: browser-actions/setup-chrome@latest
+      - name: Install puppeteer
+        run: npm install puppeteer
+      - name: Check in
+        run: node main.js
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: screenshot.png
+          path: screenshot.png
+          retention-days: 14
