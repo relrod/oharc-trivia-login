@@ -1,5 +1,5 @@
 ---
-name: dagd-test
+name: crowdpurr
 on:
   push:
   pull_request:
