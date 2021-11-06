@@ -24,7 +24,9 @@ jobs:
       - name: Install puppeteer
         run: npm install puppeteer
       - name: Check in
-        run: node main.js
+        run: |
+          export url="$(curl -s 'https://wz5bbs.com/gameday/' | grep 'iframe.*crowd\.live' | sed 's/.*src="\([^"]*\).*/\1/')"
+          node main.js "$url"
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:

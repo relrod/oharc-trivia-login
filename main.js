@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
-const url = "https://www.crowd.live/GSSGS";
+var url = process.argv[2];
+console.log("URL given: " + url);
 (async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
