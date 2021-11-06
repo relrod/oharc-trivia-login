@@ -8,6 +8,9 @@ console.log("URL given: " + url);
     await page.waitForSelector('#firstName');
     await page.type("#firstName", "AI5A - Rick");
     await page.type("#city", "South Central Austin");
+    if (document.querySelector("#advancedTeam")) {
+        await page.select('#advancedTeam', 'South');
+    }
     await page.click("#anonymousLoginButton");
     await page.waitForSelector('#firstName', {hidden: true});
     await page.screenshot({
